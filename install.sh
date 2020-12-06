@@ -30,6 +30,18 @@ while read -r line ; do
     fi
 done < "$PACKAGE_FILE"
 
+export EDITOR=vim
+echo "export EDITOR=vim" >> ~/.profile
+echo "export EDITOR=vim" >> ~/.bashrc
+echo "export EDITOR=vim" >> ~/.zshrc
+echo "set -o vi" >> ~/.bashrc
+echo "bindkey -v" >> ~/.zshrc
+
+cd
+git clone https://github.com/gpakosz/.tmux.git
+ln -s -f .tmux/.tmux.conf
+cp .tmux/.tmux.conf.local .
+
 echo -e "$BLUE"Trying to update tldr"$FORMAT"
 tldr -u && echo -e "$GREEN"tldr successfully updated"$FORMAT" || echo -e "$RED"Error updating tldr"$FORMAT"
 clear
