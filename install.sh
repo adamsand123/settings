@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 PACKAGE_FILE="$(pwd)"/package_list.txt
-
+SCRIPT_DIR="$(pwd)"
 FORMAT="\e[0m"
 BOLD="\e[1m"
 RED="$BOLD\e[31m"
@@ -23,12 +23,12 @@ sudo apt upgrade -y || echo -e "$RED"Failed to upgrade packages"$FORMAT"
 
 while read -r line ; do
     apt_install
-    clear
     if [[ $? -ne 0 ]] ; then
         echo -e "$RED"Function apt_install failed to run"$FORMAT"
         exit 1
     fi
 done < "$PACKAGE_FILE"
+clear
 
 export EDITOR=vim
 echo "export EDITOR=vim" >> ~/.profile
@@ -38,9 +38,10 @@ echo "set -o vi" >> ~/.bashrc
 echo "bindkey -v" >> ~/.zshrc
 
 cd
-git clone https://github.com/gpakosz/.tmux.git
-ln -s -f .tmux/.tmux.conf
-cp .tmux/.tmux.conf.local .
+echo -e "$BLUE"Modifying tmux"$FORMAT"
+git clone https://github.com/gpakosz/.tmux.git || echo -e "$RED"Failed to clone git"$FORMAT"
+ln -s -f .tmux/.tmux.conf || echo -e "$RED"Failed to create symbolic link "$FORMAT"
+cp $SCRIPT_DIR/tmux.conf.local ~/.tmux.conf.local || echo -e "$RED"Failed to clone git"$FORMAT"
 
 echo -e "$BLUE"Trying to update tldr"$FORMAT"
 tldr -u && echo -e "$GREEN"tldr successfully updated"$FORMAT" || echo -e "$RED"Error updating tldr"$FORMAT"
