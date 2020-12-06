@@ -3,3 +3,7 @@ python3-pip
 shellcheck
 tldr
 fzf
+curl
+tmux
+vim
+zsh
