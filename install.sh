@@ -29,4 +29,5 @@ while read -r line ; do
   fi
 done < "$PACKAGE_FILE"
 
-tldr -u
+echo -e "$BLUE"Trying to update tldr"$FORMAT"
+tldr -u && echo -e "$GREEN"tldr successfully updated"$FORMAT" || echo -e "$RED"Error updating tldr"$FORMAT"

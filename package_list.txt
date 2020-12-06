@@ -1,0 +1,4 @@
+nnn
+python3-pip
+shellcheck
+tldr
