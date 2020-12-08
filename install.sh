@@ -28,7 +28,6 @@ while read -r line ; do
         exit 1
     fi
 done < "$PACKAGE_FILE"
-clear
 
 export EDITOR=vim
 echo "export EDITOR=vim" >> ~/.profile
@@ -36,6 +35,7 @@ echo "export EDITOR=vim" >> ~/.bashrc
 echo "export EDITOR=vim" >> ~/.zshrc
 echo "set -o vi" >> ~/.bashrc
 echo "bindkey -v" >> ~/.zshrc
+cp $SCRIPT_DIR/vimrc ~/.vimrc
 
 cd
 echo -e "$BLUE"Modifying tmux"$FORMAT"
@@ -45,8 +45,6 @@ cp $SCRIPT_DIR/tmux.conf.local ~/.tmux.conf.local || echo -e "$RED"Failed to clo
 
 echo -e "$BLUE"Trying to update tldr"$FORMAT"
 tldr -u && echo -e "$GREEN"tldr successfully updated"$FORMAT" || echo -e "$RED"Error updating tldr"$FORMAT"
-clear
 
 echo -e "$BLUE"Trying to update tldr"$FORMAT"
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && echo -e "$RED"Error installing oh-my-zsh"$DEFAULT"
-clear
